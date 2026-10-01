@@ -73,7 +73,8 @@
         <div class="shape-blob-2"></div>
       </div>
 
-      <div class="container hero-grid">
+      <div class="container hero-grid hero-grid-booking">
+        <!-- Hero Left Column: Intro & Therapist Card -->
         <div class="hero-content">
           <!-- Availability Badge -->
           <div class="hero-badge">
@@ -89,34 +90,24 @@
             Your thoughts, emotions, and experiences matter.
           </p>
 
+          <!-- Therapist Profile Highlight Card -->
+          <div class="hero-therapist-card">
+            <div class="therapist-avatar-wrap">
+              <img src="assets/images/nandana-portrait.webp" alt="Nandana Sreekumar" class="therapist-avatar">
+              <span class="avatar-verified"><i class="fa-solid fa-check"></i></span>
+            </div>
+            <div class="therapist-info">
+              <h3>Nandana Sreekumar</h3>
+              <p class="therapist-title">Consultant Psychologist</p>
+              <p class="therapist-sub">M.Sc. Psychology &bull; School of Behavioural Sciences, MGU</p>
+            </div>
+          </div>
+
           <p class="hero-description">
-            Hello, I am <strong>Nandana Sreekumar</strong>, a Consultant Psychologist with a Master’s degree in Psychology from the School of Behavioural Sciences, Mahatma Gandhi University. I am committed to providing compassionate, confidential, and respectful psychological support tailored to your unique journey.
+            Hello, I am Nandana Sreekumar. I am committed to providing compassionate, confidential, and respectful psychological support tailored to your unique journey.
           </p>
 
-          <!-- Core Credentials Pills -->
-          <div class="hero-credentials-pills">
-            <span class="credential-pill">
-              <i class="fa-solid fa-graduation-cap"></i> M.Sc. Psychology (MGU)
-            </span>
-            <span class="credential-pill">
-              <i class="fa-solid fa-shield-heart"></i> Confidential & Empathetic
-            </span>
-            <span class="credential-pill">
-              <i class="fa-solid fa-hand-holding-heart"></i> Respectful Support
-            </span>
-          </div>
-
-          <!-- Hero Action Buttons -->
-          <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">
-              <i class="fa-solid fa-calendar-plus"></i> Book a Consultation
-            </a>
-            <a href="#philosophy" class="btn btn-outline">
-              <i class="fa-solid fa-quote-left"></i> Her Philosophy
-            </a>
-          </div>
-
-          <!-- Trust Bar -->
+          <!-- Trust Bar / Bullets -->
           <div class="hero-trust-bar">
             <div class="trust-item">
               <div class="trust-icon">
@@ -150,40 +141,72 @@
           </div>
         </div>
 
-        <!-- Hero Visual Frame with Nandana's Portrait -->
-        <div class="hero-visual">
-          <div class="hero-image-wrapper">
-            <div class="hero-image-aura"></div>
-            
-            <div class="hero-image-frame">
-              <img 
-                src="assets/images/nandana-portrait.webp" 
-                alt="Nandana Sreekumar - Consultant Psychologist" 
-                class="hero-image"
-                loading="eager"
-              >
-            </div>
-
-            <!-- Floating Badges on Portrait -->
-            <div class="floating-badge badge-top">
-              <div class="floating-icon icon-blue">
-                <i class="fa-solid fa-hands-holding-child"></i>
+        <!-- Hero Right Column: Integrated Book Appointment Form -->
+        <div class="hero-booking-panel">
+          <div class="booking-card">
+            <div class="booking-card-header">
+              <div class="booking-icon-box">
+                <i class="fa-regular fa-calendar-check"></i>
               </div>
-              <div class="floating-info">
-                <h4>Therapeutic Rapport</h4>
-                <p>Empathy, warmth & respect</p>
+              <div>
+                <h3>Book an Appointment</h3>
+                <p>Schedule a confidential consultation</p>
               </div>
             </div>
 
-            <div class="floating-badge badge-bottom">
-              <div class="floating-icon icon-emerald">
-                <i class="fa-solid fa-circle-check"></i>
+            <form id="heroBookingForm" class="booking-form" novalidate>
+              <div class="form-group">
+                <label for="heroClientName">Full Name <span>*</span></label>
+                <input type="text" id="heroClientName" name="clientName" class="form-control" placeholder="Your Name" required>
               </div>
-              <div class="floating-info">
-                <h4>Consultant Psychologist</h4>
-                <p>M.Sc. Behavioural Sciences</p>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="heroClientPhone">Phone / WhatsApp <span>*</span></label>
+                  <input type="tel" id="heroClientPhone" name="clientPhone" class="form-control" placeholder="Contact Number" required>
+                </div>
+                <div class="form-group">
+                  <label for="heroConsultationMode">Preferred Mode <span>*</span></label>
+                  <select id="heroConsultationMode" name="consultationMode" class="form-control" required>
+                    <option value="Online Video Session">Online Video</option>
+                    <option value="Telephonic Consultation">Phone Consultation</option>
+                    <option value="In-Person Session">In-Person</option>
+                  </select>
+                </div>
               </div>
-            </div>
+
+              <div class="form-group">
+                <label for="heroClientService">Area of Support <span>*</span></label>
+                <select id="heroClientService" name="clientService" class="form-control" required>
+                  <option value="" disabled selected>Select area of interest...</option>
+                  <option value="Counselling & Emotional Wellbeing">Counselling & Emotional Wellbeing</option>
+                  <option value="Psychological Assessment">Psychological Assessment</option>
+                  <option value="Child & Adolescent Support">Child & Adolescent Support</option>
+                  <option value="Health & Mental Health">Health & Mental Health</option>
+                  <option value="Research & Psychology Education">Research & Psychology Education</option>
+                  <option value="General Consultation">General Consultation</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="heroClientMessage">Brief Note (Optional)</label>
+                <input type="text" id="heroClientMessage" name="clientMessage" class="form-control" placeholder="Preferred timing or brief note...">
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">
+                  <i class="fa-solid fa-paper-plane"></i> Request Appointment
+                </button>
+                <a href="https://wa.me/919876543210?text=Hello%20Nandana%20Sreekumar,%20I%20would%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" aria-label="Book via WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+              </div>
+
+              <div class="booking-privacy-notice">
+                <i class="fa-solid fa-lock"></i>
+                <span>Strictly confidential under psychological ethical standards.</span>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -632,6 +655,21 @@
       </div>
     </div>
   </div>
+
+  <!-- ===================================================================
+       FLOATING WHATSAPP BUTTON (Always Following)
+       =================================================================== -->
+  <aside class="floating-whatsapp-widget" aria-label="Always Following WhatsApp Contact">
+    <a href="https://wa.me/919876543210?text=Hello%20Nandana%20Sreekumar,%20I%20would%20like%20to%20inquire%20about%20a%20psychological%20consultation." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="floating-whatsapp-btn"
+       aria-label="Chat with Nandana Sreekumar on WhatsApp">
+      <span class="floating-whatsapp-pulse"></span>
+      <i class="fa-brands fa-whatsapp"></i>
+      <span class="floating-whatsapp-label">Chat on WhatsApp</span>
+    </a>
+  </aside>
 
   <!-- Dynamic Year Script & Main Logic -->
   <script>

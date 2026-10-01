@@ -111,8 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 6. Interactive Consultation Booking Form & Modal
-  const bookingForm = document.getElementById('consultationForm');
+  // 6. Interactive Consultation Booking Forms & Modal
   const successModal = document.getElementById('successModal');
   const modalCloseBtn = document.getElementById('modalCloseBtn');
   const modalOkBtn = document.getElementById('modalOkBtn');
@@ -120,20 +119,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const clientNameSpan = document.getElementById('summaryClientName');
   const serviceSpan = document.getElementById('summaryService');
 
-  if (bookingForm) {
-    bookingForm.addEventListener('submit', (e) => {
+  const setupBookingForm = (formId) => {
+    const form = document.getElementById(formId);
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
 
       // Retrieve form values
-      const name = document.getElementById('clientName').value.trim();
-      const email = document.getElementById('clientEmail').value.trim();
-      const phone = document.getElementById('clientPhone').value.trim();
-      const service = document.getElementById('clientService').value;
-      const mode = document.getElementById('consultationMode').value;
-      const message = document.getElementById('clientMessage').value.trim();
+      const name = (form.querySelector('[name="clientName"]') || form.querySelector('#clientName') || {}).value?.trim() || '';
+      const phone = (form.querySelector('[name="clientPhone"]') || form.querySelector('#clientPhone') || {}).value?.trim() || '';
+      const email = (form.querySelector('[name="clientEmail"]') || form.querySelector('#clientEmail') || {}).value?.trim() || '';
+      const service = (form.querySelector('[name="clientService"]') || form.querySelector('#clientService') || {}).value || '';
+      const mode = (form.querySelector('[name="consultationMode"]') || form.querySelector('#consultationMode') || {}).value || 'Online Video Session';
+      const message = (form.querySelector('[name="clientMessage"]') || form.querySelector('#clientMessage') || {}).value?.trim() || '';
 
       if (!name || !phone || !service) {
-        alert('Please fill in your name, contact number, and select the area of interest.');
+        alert('Please fill in your name, contact number, and select an area of interest.');
         return;
       }
 
@@ -142,9 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (serviceSpan) serviceSpan.textContent = service;
 
       // Construct WhatsApp message URL
-      const therapistPhone = '919876543210'; // Professional placeholder, customizable
+      const therapistPhone = '919876543210';
       const whatsappText = encodeURIComponent(
-        `Hello Nandana Sreekumar,\n\nMy name is ${name}.\nI would like to request a consultation session.\n\n*Service/Area:* ${service}\n*Preferred Mode:* ${mode}\n*Contact:* ${phone} / ${email}\n*Notes:* ${message || 'None'}\n\nLooking forward to hearing from you. Thank you!`
+        `Hello Nandana Sreekumar,\n\nMy name is ${name}.\nI would like to request a consultation session.\n\n*Service/Area:* ${service}\n*Preferred Mode:* ${mode}\n*Contact:* ${phone}${email ? ' / ' + email : ''}\n*Notes:* ${message || 'None'}\n\nLooking forward to hearing from you. Thank you!`
       );
       const whatsappUrl = `https://wa.me/${therapistPhone}?text=${whatsappText}`;
 
@@ -158,9 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Reset form
-      bookingForm.reset();
+      form.reset();
     });
-  }
+  };
+
+  setupBookingForm('heroBookingForm');
+  setupBookingForm('consultationForm');
 
   // Modal Close Handlers
   const closeModal = () => {
