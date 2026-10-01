@@ -66,48 +66,29 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', highlightNavLink, { passive: true });
   highlightNavLink();
 
-  // 4. Services Filter Tabs
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const serviceCards = document.querySelectorAll('.service-card');
+  // 4. Smooth Scroll Reveal Animations
+  const revealElements = document.querySelectorAll(
+    '.service-card, .value-card, .philosophy-reflection-card, .booking-card, .contact-info-panel, .contact-form-panel, .quote-highlight-banner'
+  );
 
-  if (filterBtns.length && serviceCards.length) {
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Active button state
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const filterValue = btn.getAttribute('data-filter');
-
-        serviceCards.forEach(card => {
-          const category = card.getAttribute('data-category');
-          if (filterValue === 'all' || category === filterValue || category.includes(filterValue)) {
-            card.style.display = 'flex';
-            card.style.animation = 'fadeIn 0.4s ease forwards';
-          } else {
-            card.style.display = 'none';
-          }
-        });
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
       });
+    }, {
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.08
+    });
+
+    revealElements.forEach(el => {
+      el.classList.add('reveal-on-scroll');
+      revealObserver.observe(el);
     });
   }
-
-  // 5. FAQ Accordion
-  const accordionItems = document.querySelectorAll('.accordion-item');
-  accordionItems.forEach(item => {
-    const header = item.querySelector('.accordion-header');
-    header.addEventListener('click', () => {
-      const isActive = item.classList.contains('active');
-
-      // Close all items
-      accordionItems.forEach(i => i.classList.remove('active'));
-
-      // If it wasn't active, activate it
-      if (!isActive) {
-        item.classList.add('active');
-      }
-    });
-  });
 
   // 6. Interactive Consultation Booking Forms & Modal
   const successModal = document.getElementById('successModal');
