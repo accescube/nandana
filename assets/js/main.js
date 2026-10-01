@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mobileToggle && navMenu) {
     mobileToggle.addEventListener('click', () => {
       const isOpen = navMenu.classList.toggle('open');
-      mobileToggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+      mobileToggle.classList.toggle('active', isOpen);
       mobileToggle.setAttribute('aria-expanded', isOpen);
     });
 
@@ -32,10 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('open');
-        if (mobileToggle) {
-          mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-          mobileToggle.setAttribute('aria-expanded', 'false');
-        }
+        mobileToggle.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
       });
     });
   }
